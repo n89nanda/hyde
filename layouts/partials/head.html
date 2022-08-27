@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"{{with .Site.LanguageCode}} xml:lang="{{.}}" lang="{{.}}"{{end}}>
+<html xmlns="http://www.w3.org/1999/xhtml" {{with .Site.LanguageCode}} xml:lang="{{.}}" lang="{{.}}" {{end}}>
+
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -11,7 +12,7 @@
   {{ if .IsHome -}}
   <title>{{ .Site.Title }}</title>
   {{- else -}}
-  <title>{{ .Title }} &middot; {{ .Site.Title }}</title>
+  <title>{{ .Title }} &vert; {{ .Site.Title }}</title>
   {{- end }}
   <meta name="description" content="{{if .IsHome}}{{ $.Site.Params.description }}{{else}}{{.Description}}{{end}}" />
 
@@ -28,7 +29,8 @@
 
   <!-- RSS etc -->
   {{ range .AlternativeOutputFormats -}}
-    {{ printf `<link href="%s" rel="%s" type="%s" title="%s" />` .Permalink .Rel .MediaType.Type $.Site.Title | safeHTML }}
+  {{ printf `
+  <link href="%s" rel="%s" type="%s" title="%s" />` .Permalink .Rel .MediaType.Type $.Site.Title | safeHTML }}
   {{ end -}}
 
   {{ partial "hook_head_end.html" . }}
